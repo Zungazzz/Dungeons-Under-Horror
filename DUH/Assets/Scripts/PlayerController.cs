@@ -49,11 +49,9 @@ public class PlayerController : MonoBehaviour
         myAnimator.SetFloat("moveX", movement.x);
         myAnimator.SetFloat("moveY", movement.y);
 
-        // Assuming 'isRunning' is a parameter in the Animator Controller
-        bool isMoving = movement.magnitude > 0.1f; // Check if there's movement (change 0.1f as needed)
+        bool isMoving = movement.magnitude > 0.1f; 
 
-        // Set the 'isRunning' parameter based on movement
-        myAnimator.SetBool("isRunning", isMoving);
+
     }
 
 
