@@ -4,16 +4,29 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+public bool FacingLeft { get{ return facingLeft ; } set{ facingLeft = value ; } }
+public static PlayerController Instance;    
     [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private float dashSpeed = 4f;
+    [SerializeField] private TrailRenderer myTrailRenderer;
     private Vector2 movement;
     private Rigidbody2D rb;
     private Animator myAnimator;
-    private SpriteRenderer mySpriteRenderer; // Corrected variable name
-
+    private SpriteRenderer mySpriteRenderer; 
+    private bool isDashing = false;
+    private bool facingLeft = false;
     private PlayerControls playerControls;
+    private void Start()
+    {
+        playerControls.Movement.Dash.performed += _ => Dash();
+
+    }
+
+
 
     private void Awake()
     {
+        Instance = this;
         playerControls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
@@ -68,11 +81,36 @@ public class PlayerController : MonoBehaviour
         // Flip the player model based on the position of the mouse cursor compared to the player's position
         if (mousePos.x < playerScreenPoint.x)
         {
-            mySpriteRenderer.flipX = true; // Corrected property name to flipX
+            mySpriteRenderer.flipX = true; 
+            FacingLeft = true;
         }
         else
         {
-            mySpriteRenderer.flipX = false; // Corrected property name to flipX
+            mySpriteRenderer.flipX = false; 
+            FacingLeft = false;
         }
     }
+private void Dash()
+{
+    if(!isDashing){
+    moveSpeed *= dashSpeed;
+    isDashing = true;
+    myTrailRenderer.emitting = true;
+    StartCoroutine(EndDashRoutine());
+    }
+
+}
+
+private IEnumerator EndDashRoutine()
+{
+    float dashTime = 0.2f;
+    float dashCD = .25f;
+    yield return new WaitForSeconds(dashTime);
+    moveSpeed /= dashSpeed;
+    myTrailRenderer.emitting = false;
+    yield return new WaitForSeconds(dashCD);
+    isDashing = false;
+}
+
+    
 }
