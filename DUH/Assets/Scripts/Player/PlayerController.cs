@@ -16,9 +16,11 @@ public static PlayerController Instance;
     private bool isDashing = false;
     private bool facingLeft = false;
     private PlayerControls playerControls;
+    private float startingMoveSpeed;
     private void Start()
     {
         playerControls.Movement.Dash.performed += _ => Dash();
+        startingMoveSpeed = moveSpeed;
 
     }
 
@@ -106,7 +108,7 @@ private IEnumerator EndDashRoutine()
     float dashTime = 0.2f;
     float dashCD = .25f;
     yield return new WaitForSeconds(dashTime);
-    moveSpeed /= dashSpeed;
+    moveSpeed = startingMoveSpeed;
     myTrailRenderer.emitting = false;
     yield return new WaitForSeconds(dashCD);
     isDashing = false;
