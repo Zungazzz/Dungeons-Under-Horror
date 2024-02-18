@@ -9,7 +9,7 @@ public static PlayerController Instance;
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float dashSpeed = 4f;
     [SerializeField] private TrailRenderer myTrailRenderer;
-    private Vector2 movement;
+    public Vector2 movement;
     private Rigidbody2D rb;
     private Animator myAnimator;
     private SpriteRenderer mySpriteRenderer; 
