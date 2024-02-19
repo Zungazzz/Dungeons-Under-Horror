@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be685253700f36c48977e55496e08cd2, type: 3}
-  m_Name: Ice_Zombie
+  m_Script: {fileID: 11500000, guid: d1feab3994bbd2a4fb586f8c56263fbc, type: 3}
+  m_Name: Knight
   m_EditorClassIdentifier: 
-  enemyName: Ice Zombie
-  moveSpeed: 2
-  maxHealth: 0
-  damage: 0
+  startingWeapon: {fileID: 0}
+  maxHealth: 15
+  recovery: 0
+  moveSpeed: 3
+  might: 0
+  projectileSpeed: 0

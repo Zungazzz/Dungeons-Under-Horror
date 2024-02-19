@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c40d14a207285f24a9593b711c1c3f4c, type: 3}
-  m_Name: GarlicWeapon
+  m_Script: {fileID: 11500000, guid: be685253700f36c48977e55496e08cd2, type: 3}
+  m_Name: Ice_Zombie
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3603065111927772913, guid: 5319141dff0bacb4db46b59ab343b050, type: 3}
-  damage: 0
-  speed: 0
-  coolDownDuration: 3
-  pierce: 0
+  enemyName: Ice Zombie
+  moveSpeed: 2
+  maxHealth: 15
+  damage: 5

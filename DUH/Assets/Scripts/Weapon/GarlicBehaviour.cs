@@ -10,13 +10,23 @@ public class GarlicBehaviour : MeleeWeaponBehaviour
     {
         base.Start();
     }
-    protected override void OnTriggerEnter2D(Collider2D collision){
-        if (collision.CompareTag("Enemy"))
+protected override void OnTriggerEnter2D(Collider2D collision)
+{
+    if (collision.CompareTag("Enemy"))
+    {
+        EnemyStats enemy = collision.gameObject.GetComponent<EnemyStats>();
+        enemy.TakeDamage(currentDamage);
+        markedEnemies.Add(collision.gameObject);
+    }
+    else if (collision.CompareTag("Prop"))
+    {
+        if (collision.gameObject.TryGetComponent(out BreakableProps breakable))
         {
-            EnemyStats enemy = collision.gameObject.GetComponent<EnemyStats>();
-            enemy.TakeDamage(currentDamage);
+            breakable.TakeDamage(currentDamage);
             markedEnemies.Add(collision.gameObject);
         }
     }
+}
+
 
 }

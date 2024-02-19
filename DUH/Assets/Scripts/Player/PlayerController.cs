@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 public bool FacingLeft { get{ return facingLeft ; } set{ facingLeft = value ; } }
 public static PlayerController Instance;    
-    [SerializeField] private float moveSpeed = 3f;
+    // [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float dashSpeed = 4f;
     [SerializeField] private TrailRenderer myTrailRenderer;
     public Vector2 movement;
@@ -17,10 +17,11 @@ public static PlayerController Instance;
     private bool facingLeft = false;
     private PlayerControls playerControls;
     private float startingMoveSpeed;
+    public CharacterScriptableObject characterScriptableObject;
     private void Start()
     {
         playerControls.Movement.Dash.performed += _ => Dash();
-        startingMoveSpeed = moveSpeed;
+        startingMoveSpeed = characterScriptableObject.MoveSpeed;
 
     }
 
@@ -72,7 +73,7 @@ public static PlayerController Instance;
 
     private void Move()
     {
-        rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
+        rb.MovePosition(rb.position + movement * (characterScriptableObject.MoveSpeed * Time.fixedDeltaTime));
     }
 
     private void AdjustPlayerFacingDirection()
@@ -95,7 +96,7 @@ public static PlayerController Instance;
 private void Dash()
 {
     if(!isDashing){
-    moveSpeed *= dashSpeed;
+    characterScriptableObject.MoveSpeed *= dashSpeed;
     isDashing = true;
     myTrailRenderer.emitting = true;
     StartCoroutine(EndDashRoutine());
@@ -108,7 +109,7 @@ private IEnumerator EndDashRoutine()
     float dashTime = 0.2f;
     float dashCD = .25f;
     yield return new WaitForSeconds(dashTime);
-    moveSpeed = startingMoveSpeed;
+    characterScriptableObject.MoveSpeed = startingMoveSpeed;
     myTrailRenderer.emitting = false;
     yield return new WaitForSeconds(dashCD);
     isDashing = false;

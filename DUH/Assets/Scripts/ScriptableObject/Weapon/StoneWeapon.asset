@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c40d14a207285f24a9593b711c1c3f4c, type: 3}
   m_Name: StoneWeapon
   m_EditorClassIdentifier: 
-  prefab: {fileID: 959157273768186845, guid: 8bf11e6afe7cd7e488bf1a66f068c3e2, type: 3}
-  damage: 0
+  prefab: {fileID: 112778911536462501, guid: 1b443c24bbfd5ab48ba9c2cc5cdccd4d, type: 3}
+  damage: 5
   speed: 10
   coolDownDuration: 3
-  pierce: 0
+  pierce: 1
