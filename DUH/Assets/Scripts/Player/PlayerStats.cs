@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    [HideInInspector]
     public CharacterScriptableObject characterScriptableObject;
-    float currentHealth;
-    float currentRecovery;
-    float currentMoveSpeed;
-    float currentMight;
-    float currentProjectileSpeed;
+    [HideInInspector]
+    public float currentHealth;
+    [HideInInspector]
+    public float currentRecovery;
+    [HideInInspector]
+    public float currentMoveSpeed;
+    [HideInInspector]
+    public float currentMight;
+    [HideInInspector]
+    public float currentProjectileSpeed;
+    [HideInInspector]
+    public float currentMagnet;
     GameObject currentWeapon;
     public List<LevelRange> levelRanges;
 
@@ -31,6 +39,7 @@ public class PlayerStats : MonoBehaviour
         currentMight = characterScriptableObject.Might;
         currentProjectileSpeed = characterScriptableObject.ProjectileSpeed;
         currentWeapon = characterScriptableObject.StartingWeapon;
+        currentMagnet = characterScriptableObject.Magnet;
     }
 
     [System.Serializable]
@@ -56,8 +65,10 @@ public class PlayerStats : MonoBehaviour
             {
                 isInvincible = false;
             }
+            Recovery();
         }
     }
+
 
     public void IncreaseExperience(int amount)
     {
@@ -105,12 +116,21 @@ public class PlayerStats : MonoBehaviour
     }
     public void RestoreHealth(float amount)
     {
-    if (currentHealth < characterScriptableObject.MaxHealth)
-    {
-        currentHealth += amount;
+        if (currentHealth < characterScriptableObject.MaxHealth)
+        {
+            currentHealth += amount;
+        }
+        if (currentHealth > characterScriptableObject.MaxHealth)
+        {
+            currentHealth = characterScriptableObject.MaxHealth;
+        }
     }
-    if (currentHealth > characterScriptableObject.MaxHealth)
-    {
-        currentHealth = characterScriptableObject.MaxHealth;
-    }}
+    void Recovery(){
+        if(currentHealth < characterScriptableObject.MaxHealth){
+            currentHealth += currentRecovery * Time.deltaTime;
+            if(currentHealth > characterScriptableObject.MaxHealth){
+                currentHealth = characterScriptableObject.MaxHealth;
+            }
+        }
+    }
 }

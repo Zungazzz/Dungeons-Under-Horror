@@ -5,10 +5,12 @@ using UnityEngine;
 public class EnemyStats : MonoBehaviour
 {
     public EnemyScriptableObject enemyStats;
-
-    float currentMoveSpeed;
-    float currentHealth;
-    float currentDamage;
+    [HideInInspector]
+    public float currentMoveSpeed;
+    [HideInInspector]
+    public float currentHealth;
+    [HideInInspector]
+    public float currentDamage;
 
     private void Awake(){
         currentMoveSpeed = enemyStats.MoveSpeed;

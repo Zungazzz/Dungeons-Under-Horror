@@ -20,6 +20,6 @@ public class StoneBehaviour : ProjectileWeaponBehaviour
         transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
 
         // Move the projectile in the specified direction
-        transform.position += direction * weaponData.Speed * Time.deltaTime;
+        transform.position += direction * currentSpeed * Time.deltaTime;
     }
 }

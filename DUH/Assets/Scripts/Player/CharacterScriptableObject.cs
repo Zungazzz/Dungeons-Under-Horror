@@ -20,4 +20,8 @@ public class CharacterScriptableObject : ScriptableObject
 
     [SerializeField] private float projectileSpeed;
     public float ProjectileSpeed { get => projectileSpeed; set => projectileSpeed = value; }
+
+    // Define Magnet property with a private setter
+    [SerializeField] private float magnet;
+    public float Magnet { get => magnet; private set => magnet = value; }
 }
