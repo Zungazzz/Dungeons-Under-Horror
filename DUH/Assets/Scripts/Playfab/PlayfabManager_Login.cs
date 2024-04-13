@@ -34,7 +34,6 @@ public class PlayfabManager_Login : MonoBehaviour
         if (string.IsNullOrEmpty(emailInputField.text) || string.IsNullOrEmpty(passwordInputField.text))
         {
             messageText.text = "Email and password cannot be empty!";
-            Debug.LogError("Email and password cannot be empty!");
             isProcessingRequest = false;
             yield break;
         }
@@ -80,7 +79,6 @@ public class PlayfabManager_Login : MonoBehaviour
     private void OnLoginSuccess(LoginResult result)
     {
         messageText.text = "Logged in!";
-        Debug.Log("Congratulations, you are logged in!");
         isProcessingRequest = false;
     }
 
@@ -88,14 +86,12 @@ public class PlayfabManager_Login : MonoBehaviour
     {
         // Handle login failure
         messageText.text = GetFriendlyErrorMessage(error);
-        Debug.LogError(error.GenerateErrorReport());
         isProcessingRequest = false;
     }
 
     private void OnPasswordReset(SendAccountRecoveryEmailResult result)
     {
         messageText.text = "Password reset email sent!";
-        Debug.Log("Password reset email sent!");
         isProcessingRequest = false;
     }
 
@@ -103,7 +99,6 @@ public class PlayfabManager_Login : MonoBehaviour
     {
         // Handle password reset failure
         messageText.text = GetFriendlyErrorMessage(error);
-        Debug.LogError(error.GenerateErrorReport());
         isProcessingRequest = false;
     }
 

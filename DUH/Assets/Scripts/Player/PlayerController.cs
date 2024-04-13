@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-public bool FacingLeft { get{ return facingLeft ; } set{ facingLeft = value ; } }
-public static PlayerController Instance;    
+    public bool FacingLeft { get { return facingLeft; } set { facingLeft = value; } }
+    public static PlayerController Instance;
 
-PlayerStats playerStats;
+    PlayerStats playerStats;
     // [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float dashSpeed = 4f;
     [SerializeField] private TrailRenderer myTrailRenderer;
     public Vector2 movement;
     private Rigidbody2D rb;
     private Animator myAnimator;
-    private SpriteRenderer mySpriteRenderer; 
+    private SpriteRenderer mySpriteRenderer;
     private bool isDashing = false;
     private bool facingLeft = false;
     private PlayerControls playerControls;
     private float startingMoveSpeed;
+    private Knockback knockback;
     private void Start()
     {
         playerStats = GetComponent<PlayerStats>();
@@ -36,6 +37,7 @@ PlayerStats playerStats;
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         mySpriteRenderer = GetComponent<SpriteRenderer>(); // Get the SpriteRenderer component
+        knockback = GetComponent<Knockback>();
     }
 
     private void OnEnable()
@@ -67,7 +69,7 @@ PlayerStats playerStats;
         myAnimator.SetFloat("moveX", movement.x);
         myAnimator.SetFloat("moveY", movement.y);
 
-        bool isMoving = movement.magnitude > 0.1f; 
+        bool isMoving = movement.magnitude > 0.1f;
 
 
     }
@@ -75,8 +77,11 @@ PlayerStats playerStats;
 
     private void Move()
     {
+        if(knockback.GettingKnockback){ return; }
         rb.MovePosition(rb.position + movement * (playerStats.currentMoveSpeed * Time.fixedDeltaTime));
+        
     }
+
 
     private void AdjustPlayerFacingDirection()
     {
@@ -86,36 +91,37 @@ PlayerStats playerStats;
         // Flip the player model based on the position of the mouse cursor compared to the player's position
         if (mousePos.x < playerScreenPoint.x)
         {
-            mySpriteRenderer.flipX = true; 
+            mySpriteRenderer.flipX = true;
             FacingLeft = true;
         }
         else
         {
-            mySpriteRenderer.flipX = false; 
+            mySpriteRenderer.flipX = false;
             FacingLeft = false;
         }
     }
-private void Dash()
-{
-    if(!isDashing){
-    playerStats.currentMoveSpeed *= dashSpeed;
-    isDashing = true;
-    myTrailRenderer.emitting = true;
-    StartCoroutine(EndDashRoutine());
+    private void Dash()
+    {
+        if (!isDashing)
+        {
+            playerStats.currentMoveSpeed *= dashSpeed;
+            isDashing = true;
+            myTrailRenderer.emitting = true;
+            StartCoroutine(EndDashRoutine());
+        }
+
     }
 
-}
+    private IEnumerator EndDashRoutine()
+    {
+        float dashTime = 0.2f;
+        float dashCD = .25f;
+        yield return new WaitForSeconds(dashTime);
+        playerStats.currentMoveSpeed = startingMoveSpeed;
+        myTrailRenderer.emitting = false;
+        yield return new WaitForSeconds(dashCD);
+        isDashing = false;
+    }
 
-private IEnumerator EndDashRoutine()
-{
-    float dashTime = 0.2f;
-    float dashCD = .25f;
-    yield return new WaitForSeconds(dashTime);
-    playerStats.currentMoveSpeed = startingMoveSpeed;
-    myTrailRenderer.emitting = false;
-    yield return new WaitForSeconds(dashCD);
-    isDashing = false;
-}
 
-    
 }

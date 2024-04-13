@@ -9,11 +9,8 @@ public class EnemyStats : MonoBehaviour
     private Flash flash; 
     [SerializeField] private GameObject deathVFXPrefab;
     public EnemyScriptableObject enemyStats;
-    [HideInInspector]
     public float currentMoveSpeed;
-    [HideInInspector]
     public float currentHealth;
-    [HideInInspector]
     public float currentDamage;
 
     private void Awake(){

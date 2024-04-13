@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sword : MonoBehaviour
+public class Sword : MonoBehaviour, IWeapon
 {
     private PlayerControls playerControls;
     private Animator myAnimator;
@@ -15,6 +15,7 @@ public class Sword : MonoBehaviour
 
         [SerializeField] private Transform weaponCollider;
         [SerializeField] private float swordAttackCD = 0.5f;
+        [SerializeField] private WeaponInfo weaponInfo;
     private void Awake()
     {
 
@@ -28,6 +29,11 @@ public class Sword : MonoBehaviour
         playerControls.Enable();
         playerControls.Combat.Attack.started += _ => Attack();
     }
+    
+    public WeaponInfo GetWeaponInfo() {
+        return weaponInfo;
+    }
+
 
     void Start()
     {
@@ -49,7 +55,7 @@ public class Sword : MonoBehaviour
         attackButtonDown = false;
     }
 
-    private void Attack()
+    public void Attack()
     {
         if(attackButtonDown && !isAttacking){
         isAttacking = true;

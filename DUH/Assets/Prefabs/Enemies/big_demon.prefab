@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 3636912697882825735}
   m_Layer: 0
   m_Name: big_demon
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f128d5ab90c7b4b99a8785d893a1fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackThrust: 15
+  knockBackThrust: 5
   deathVFXPrefab: {fileID: 1972687930763615834, guid: cde8fff843c7aba42a32ae569983367e, type: 3}
   enemyStats: {fileID: 11400000, guid: 09751867c40d5a5408001354a62cf33c, type: 2}
   currentMoveSpeed: 0

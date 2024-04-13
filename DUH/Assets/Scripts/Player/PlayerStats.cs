@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [HideInInspector]
+
     public CharacterScriptableObject characterScriptableObject;
-    [HideInInspector]
     public float currentHealth;
-    [HideInInspector]
     public float currentRecovery;
-    [HideInInspector]
     public float currentMoveSpeed;
-    [HideInInspector]
     public float currentMight;
-    [HideInInspector]
     public float currentProjectileSpeed;
-    [HideInInspector]
     public float currentMagnet;
     GameObject currentWeapon;
     public List<LevelRange> levelRanges;
@@ -25,6 +19,7 @@ public class PlayerStats : MonoBehaviour
     public int level = 1;
     public int experience = 0;
     public int experienceCap;
+    public bool cantakeDamage = true;
 
     [Header("I-Frames")]
     public float invincibilityDuration;
@@ -99,6 +94,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (!isInvincible)
         {
+            cantakeDamage = false;
             currentHealth -= dmg;
             invincibilityTimer = invincibilityDuration;
             isInvincible = true;

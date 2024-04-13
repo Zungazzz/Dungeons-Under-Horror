@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamageSource : MonoBehaviour
 {
-    [SerializeField] private int damageAmount = 10;
+    [SerializeField] private WeaponInfo weaponInfo;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -15,8 +15,9 @@ public class DamageSource : MonoBehaviour
         if (enemyStats != null)
         {
             // Call the TakeDamage method on the retrieved EnemyStats instance
-            enemyStats.TakeDamage(damageAmount);
+            enemyStats.TakeDamage(weaponInfo.weaponDamage);
         }
+
         BreakableProps breakableProps = other.gameObject.GetComponent<BreakableProps>();
 
         // If breakableProps is not null, destroy the breakable object

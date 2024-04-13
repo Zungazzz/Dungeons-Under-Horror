@@ -2,31 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPathFinding : MonoBehaviour
+public class EnemyPathfinding : MonoBehaviour
 {
-    private Knockback knockback;   
     [SerializeField] private float moveSpeed = 2f;
-    private Rigidbody2D rb;
-    private Vector2 movedir;
 
-    private void Awake()
-    {   
+    private Rigidbody2D rb;
+    private Vector2 moveDir;
+    private Knockback knockback;
+    private SpriteRenderer spriteRenderer;
+
+    private void Awake() {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         knockback = GetComponent<Knockback>();
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
-    {
-        if (knockback.GettingKnockback)
-        {
-            return;
-        }
+    private void FixedUpdate() {
+        if (knockback.GettingKnockback) { return; } // Update this line
 
-        rb.MovePosition(rb.position + movedir * (moveSpeed * Time.fixedDeltaTime));
+        rb.MovePosition(rb.position + moveDir * (moveSpeed * Time.fixedDeltaTime));
+
+        if(moveDir.x<0){
+            spriteRenderer.flipX = true;
+        } else {
+            spriteRenderer.flipX = false;
+        }
     }
 
-    public void MoveTo(Vector2 targetPos)
-    {
-        movedir = (targetPos - (Vector2)transform.position).normalized;
+    public void MoveTo(Vector2 targetPosition) {
+        moveDir = targetPosition;
     }
 }

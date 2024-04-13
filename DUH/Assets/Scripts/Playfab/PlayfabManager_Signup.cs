@@ -32,18 +32,19 @@ public class PlayfabManager_Signup : MonoBehaviour
         if (string.IsNullOrEmpty(emailInputField.text) || string.IsNullOrEmpty(passwordInputField.text))
         {
             messageText.text = "Email and password cannot be empty!";
-            Debug.LogError("Email and password cannot be empty!");
+            return;
         }
 
         if (!Regex.IsMatch(emailInputField.text, emailPattern))
         {
             messageText.text = "Invalid email format!";
-            Debug.LogError("Invalid email format!");
+            return;
         }
 
         if (!Regex.IsMatch(passwordInputField.text, passwordPattern))
         {
             messageText.text = "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, and one digit!";
+            return;
         }
 
         // Register the user
