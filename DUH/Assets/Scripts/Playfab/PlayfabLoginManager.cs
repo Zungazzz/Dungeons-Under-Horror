@@ -4,6 +4,7 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayfabLoginManager : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class PlayfabLoginManager : MonoBehaviour
             RequireBothUsernameAndEmail = false
         }, successResult =>
         {
+            Debug.Log("Successfully registered user: " + successResult.PlayFabId);
             Login(email, password); // If registration succeeds, automatically log in
         }, PlayfabFailure);
     }
@@ -63,6 +65,8 @@ public class PlayfabLoginManager : MonoBehaviour
             PlayerPrefs.SetString(LAST_PASSWORD_KEY, password);
             PlayerPrefs.SetString("Username", successResult.InfoResultPayload.PlayerProfile.DisplayName);
             Debug.Log("Successfully Logged in User: " + PlayerPrefs.GetString("Username"));
+            SceneManager.LoadScene("MainMenu");
+
         }, PlayfabFailure);
     }
 
@@ -92,5 +96,16 @@ private void PlayfabFailure(PlayFabError error)
     messageText.text = error.ErrorMessage; 
     Debug.LogError(error.GenerateErrorReport());
 }
+    public void OnLogoutPressed()
+    {
+        // Clear stored player credentials
+        PlayerPrefs.DeleteKey(LAST_EMAIL_KEY);
+        PlayerPrefs.DeleteKey(LAST_PASSWORD_KEY);
+        PlayerPrefs.DeleteKey("Username");
+
+        // Return to the login scene
+        SceneManager.LoadScene("LoginSignUp");
+        Debug.Log("Logged out");
+    }
 
 }

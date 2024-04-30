@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Elf
   m_EditorClassIdentifier: 
   startingWeapon: {fileID: 0}
-  maxHealth: 70
+  maxHealth: 20
   recovery: 1
   moveSpeed: 3.5
   might: 0

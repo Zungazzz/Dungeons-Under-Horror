@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if(knockback.GettingKnockback){ return; }
+        if(knockback.GettingKnockback || playerStats.isDead){ return; }
         rb.MovePosition(rb.position + movement * (playerStats.currentMoveSpeed * Time.fixedDeltaTime));
         
     }
@@ -102,8 +102,9 @@ public class PlayerController : MonoBehaviour
     }
     private void Dash()
     {
-        if (!isDashing)
+        if (!isDashing && Stamina.Instance.CurrentStamina > 0)
         {
+            Stamina.Instance.UseStamina();
             playerStats.currentMoveSpeed *= dashSpeed;
             isDashing = true;
             myTrailRenderer.emitting = true;

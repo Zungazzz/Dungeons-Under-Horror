@@ -47,7 +47,7 @@ public class EnemyStats : MonoBehaviour
         if(col.gameObject.CompareTag("Player"))
         {
             PlayerStats player = col.gameObject.GetComponent<PlayerStats>();
-            player.TakeDamage(currentDamage);
+            player.TakeDamage(currentDamage,transform);
         }
     }
 }

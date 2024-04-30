@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2119580855219664628}
   - component: {fileID: 1048026004826536658}
   - component: {fileID: 736329530245628394}
+  - component: {fileID: 5460785415878083113}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -147,4 +148,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ec2cf3cab55f24299d90b38d56f773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 8
+  particleOnHitPrefabVFX: {fileID: 7882678833386788365, guid: 7c6f3434d256782499bbccc46bdb1b6d, type: 3}
+  isEnemyProjectile: 1
+  projectileRange: 30
+  weaponInfo: {fileID: 11400000, guid: ea3f31467b08d064b8630f5f2a3c505a, type: 2}
+--- !u!70 &5460785415878083113
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8147037824992831394}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.030344926, y: -0.087992296}
+  m_Size: {x: 0.8240269, y: 0.8240269}
+  m_Direction: 1

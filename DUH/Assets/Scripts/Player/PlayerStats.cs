@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
 
     public CharacterScriptableObject characterScriptableObject;
     public float currentHealth;
+      public bool isDead
+    {
+        get;
+        private set;
+    }
     public float currentRecovery;
     public float currentMoveSpeed;
     public float currentMight;
@@ -14,6 +21,7 @@ public class PlayerStats : MonoBehaviour
     public float currentMagnet;
     GameObject currentWeapon;
     public List<LevelRange> levelRanges;
+    private Slider healthSlider;
 
     [Header("Experience/Level")]
     public int level = 1;
@@ -25,6 +33,9 @@ public class PlayerStats : MonoBehaviour
     public float invincibilityDuration;
     float invincibilityTimer;
     bool isInvincible;
+    private Knockback knockback;
+    private Flash flash;
+    [SerializeField] private float knockBackThrustAmount = 10f;
 
     void Awake()
     {
@@ -35,6 +46,8 @@ public class PlayerStats : MonoBehaviour
         currentProjectileSpeed = characterScriptableObject.ProjectileSpeed;
         currentWeapon = characterScriptableObject.StartingWeapon;
         currentMagnet = characterScriptableObject.Magnet;
+        knockback = GetComponent<Knockback>();
+        flash = GetComponent<Flash>();
     }
 
     [System.Serializable]
@@ -47,8 +60,10 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
+        isDead = false;
         // Initialize the experience cap
         experienceCap = levelRanges[0].experienceCapIncrease;
+        UpdateHealthSlider();
     }
 
     void Update()
@@ -90,26 +105,48 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float dmg)
+
+    public void TakeDamage(float damageAmount, Transform hitTransform)
     {
         if (!isInvincible)
         {
+            ScreenShakeManager.Instance.ShakeScreen();
+            knockback.GetKnockBack(hitTransform, knockBackThrustAmount);
+            StartCoroutine(flash.FlashRoutine());
+
             cantakeDamage = false;
-            currentHealth -= dmg;
+            currentHealth -= damageAmount;
             invincibilityTimer = invincibilityDuration;
             isInvincible = true;
+            UpdateHealthSlider();
             if (currentHealth <= 0)
             {
+                isDead = true;
                 Kill();
             }
         }
     }
-
+    private IEnumerator DamageRecoveryRoutine()
+    {
+        yield return new WaitForSeconds(2f);
+        cantakeDamage = true;
+    }
 
     public void Kill()
     {
         Debug.Log("Player has died");
+        StartCoroutine(DeathLoadSceneRoutine());
+
+        
     }
+
+    private IEnumerator DeathLoadSceneRoutine()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("MainMenu");
+        Destroy(gameObject);
+    }
+
     public void RestoreHealth(float amount)
     {
         if (currentHealth < characterScriptableObject.MaxHealth)
@@ -121,12 +158,46 @@ public class PlayerStats : MonoBehaviour
             currentHealth = characterScriptableObject.MaxHealth;
         }
     }
-    void Recovery(){
-        if(currentHealth < characterScriptableObject.MaxHealth){
+    void Recovery()
+    {
+        if (currentHealth < characterScriptableObject.MaxHealth)
+        {
             currentHealth += currentRecovery * Time.deltaTime;
-            if(currentHealth > characterScriptableObject.MaxHealth){
+            if (currentHealth > characterScriptableObject.MaxHealth)
+            {
                 currentHealth = characterScriptableObject.MaxHealth;
             }
+        }
+    }
+    public void UpdateHealthSlider()
+    {
+        // Find the HealthSlider GameObject in the scene
+        GameObject healthSliderObject = GameObject.Find("HealthSlider");
+
+        // Check if the HealthSlider GameObject is found
+        if (healthSliderObject != null)
+        {
+            // Get the Slider component from the HealthSlider GameObject
+            Slider sliderComponent = healthSliderObject.GetComponent<Slider>();
+
+            // Check if the Slider component is found
+            if (sliderComponent != null)
+            {
+                // Assign the Slider component to healthSlider
+                healthSlider = sliderComponent;
+
+                // Set the value and maxValue of the healthSlider
+                healthSlider.value = currentHealth;
+                healthSlider.maxValue = characterScriptableObject.MaxHealth;
+            }
+            else
+            {
+                Debug.LogWarning("Slider component not found on HealthSlider GameObject.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("HealthSlider GameObject not found in the scene.");
         }
     }
 }

@@ -57,6 +57,7 @@ public void Attack()
 
         // Instantiate a new arrow projectile
         GameObject newArrow = Instantiate(arrowPrefab, arrowSpawnPoint.position, arrowSpawnPoint.rotation);
+        newArrow.GetComponent<Projectile>().UpdateProjectileRange(weaponInfo.weaponRange);  
         StartCoroutine(DestroyArrowAfterDelay(newArrow));
     }
 }

@@ -7,17 +7,17 @@ public class PlayerHealth : MonoBehaviour
     private PlayerStats playerStats;
     private float maxHealth;
     private float currentHealth;
-    private Knockback knockback;
-    private Flash flash;
+    // private Knockback knockback;
+    // private Flash flash;
 
-    [SerializeField] private float knockbackThrustAmount = 10f;
+    
 
     private void Awake()
     {
         playerStats = GetComponent<PlayerStats>();
         maxHealth = playerStats.characterScriptableObject.MaxHealth;
-        knockback = GetComponent<Knockback>();
-        flash = GetComponent<Flash>();
+        // knockback = GetComponent<Knockback>();
+        // flash = GetComponent<Flash>();
     }
 
     private void Start()
@@ -34,23 +34,23 @@ public class PlayerHealth : MonoBehaviour
             float damage = enemyStats.currentDamage;
 
             // Apply damage to the player
-            playerStats.TakeDamage(damage);
+            playerStats.TakeDamage(damage,transform);
 
-            // Apply knockback and flash effects
-            knockback.GetKnockBack(other.gameObject.transform, knockbackThrustAmount);
-            StartCoroutine(flash.FlashRoutine());
+            // // Apply knockback and flash effects
+            // knockback.GetKnockBack(other.gameObject.transform, knockbackThrustAmount);
+            // StartCoroutine(flash.FlashRoutine());
 
             // Prevent taking damage temporarily
             playerStats.cantakeDamage = false;
 
-            // Start coroutine to enable taking damage again after recovery time
-            StartCoroutine(DamageRecoveryRoutine());
+            // // Start coroutine to enable taking damage again after recovery time
+            // StartCoroutine(DamageRecoveryRoutine());
         }
     }
 
-    private IEnumerator DamageRecoveryRoutine()
-    {
-        yield return new WaitForSeconds(playerStats.currentRecovery);
-        playerStats.cantakeDamage = true;
-    }
+    // private IEnumerator DamageRecoveryRoutine()
+    // {
+    //     yield return new WaitForSeconds(playerStats.currentRecovery);
+    //     playerStats.cantakeDamage = true;
+    // }
 }

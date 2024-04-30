@@ -6,15 +6,27 @@ public class CharacterSelector : MonoBehaviour
 
 {
     public static CharacterSelector instance;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public CharacterScriptableObject characterData;
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
-        
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+    public static CharacterScriptableObject GetData()
+    {
+        return instance.characterData;
+    }
+    public void SelectCharacter(CharacterScriptableObject data)
+    {
+        characterData = data;
     }
 }

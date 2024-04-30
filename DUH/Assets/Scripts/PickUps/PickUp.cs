@@ -8,8 +8,12 @@ public class PickUp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            // Check if the player does not have a Projectile component
+            Projectile projectileComponent = other.GetComponent<Projectile>();
+            if (projectileComponent == null)
+            {
+                Destroy(gameObject);
+            }
         }
     }
-
 }
