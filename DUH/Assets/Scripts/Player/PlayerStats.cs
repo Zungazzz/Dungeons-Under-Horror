@@ -36,9 +36,16 @@ public class PlayerStats : MonoBehaviour
     private Knockback knockback;
     private Flash flash;
     [SerializeField] private float knockBackThrustAmount = 10f;
+    Inventory inventory;
+    public int weaponIndex;
+    public int passiveItemIndex;
+    public GameObject firstWeapon,SecondWeapon;
+    public GameObject firstPassiveItemTest, secondPassiveItemTest;
+
 
     void Awake()
     {
+        inventory = GetComponent<Inventory>();
         currentHealth = characterScriptableObject.MaxHealth;
         currentRecovery = characterScriptableObject.Recovery;
         currentMoveSpeed = characterScriptableObject.MoveSpeed;
@@ -48,7 +55,11 @@ public class PlayerStats : MonoBehaviour
         currentMagnet = characterScriptableObject.Magnet;
         knockback = GetComponent<Knockback>();
         flash = GetComponent<Flash>();
-    }
+        SpawnWeapon(firstWeapon);
+        SpawnWeapon(SecondWeapon);
+        SpawnPassiveItems(firstPassiveItemTest);
+        SpawnPassiveItems(secondPassiveItemTest);
+    }   
 
     [System.Serializable]
     public class LevelRange
@@ -200,4 +211,36 @@ public class PlayerStats : MonoBehaviour
             Debug.LogWarning("HealthSlider GameObject not found in the scene.");
         }
     }
+public void SpawnWeapon(GameObject weapon)
+{
+    if (weaponIndex < inventory.weaponSlots.Count)
+    {
+        GameObject newWeapon = Instantiate(weapon, transform.position, Quaternion.identity);
+        newWeapon.transform.SetParent(transform);
+        inventory.AddWeapon(weaponIndex, newWeapon.GetComponent<WeaponController>());
+        
+        weaponIndex++;
+    }
+    else
+    {
+        Debug.Log("Inventory is full");
+    }
+}
+
+public void SpawnPassiveItems(GameObject passiveItem)
+{
+    if (passiveItemIndex < inventory.passiveItemsSlots.Count)
+    {
+        GameObject newPassiveItem = Instantiate(passiveItem, transform.position, Quaternion.identity);
+        newPassiveItem.transform.SetParent(transform);
+        inventory.AddPassiveItem(passiveItemIndex, newPassiveItem.GetComponent<PassiveItems>());
+        
+        passiveItemIndex++;
+    }
+    else
+    {
+        Debug.Log("Inventory is full");
+    }
+}
+
 }

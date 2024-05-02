@@ -13,11 +13,20 @@ public class MeleeWeaponBehaviour : MonoBehaviour
     protected float currentCooldownDuration;
     protected int currentPirece;
 
-    void Awake(){
-        currentCooldownDuration=weaponData.CoolDownDuration;
-        currentDamage=weaponData.Damage;
-        currentPirece=weaponData.Pierce;
-        currentSpeed=weaponData.Speed;
+    void Awake()
+    {
+        currentCooldownDuration = weaponData.CoolDownDuration;
+        currentDamage = weaponData.Damage;
+        currentPirece = weaponData.Pierce;
+        currentSpeed = weaponData.Speed;
+    }
+
+    public float GetCurrentDamage()
+    {
+        // Modify the current damage value
+        currentDamage *= FindObjectOfType<PlayerStats>().currentMight;
+        // Return the modified damage value
+        return currentDamage;
     }
 
     protected virtual void Start()
@@ -25,14 +34,14 @@ public class MeleeWeaponBehaviour : MonoBehaviour
         Destroy(gameObject, destroyAfterSeconds);
     }
 
-protected virtual void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {
             EnemyStats enemy = collision.gameObject.GetComponent<EnemyStats>();
             if (enemy != null)
             {
-                enemy.TakeDamage(currentDamage);
+                enemy.TakeDamage(GetCurrentDamage());
             }
         }
         else if (collision.CompareTag("Breakable"))
@@ -40,9 +49,8 @@ protected virtual void OnTriggerEnter2D(Collider2D collision)
             BreakableProps breakable = collision.gameObject.GetComponent<BreakableProps>();
             if (breakable != null)
             {
-                breakable.TakeDamage(currentDamage);
+                breakable.TakeDamage(GetCurrentDamage());
             }
         }
     }
-
 }

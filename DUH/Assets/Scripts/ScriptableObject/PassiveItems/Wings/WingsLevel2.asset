@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c40d14a207285f24a9593b711c1c3f4c, type: 3}
-  m_Name: GarlicWeapon
+  m_Script: {fileID: 11500000, guid: eb7f2aa5130a1e844b2c7cdd779d17fc, type: 3}
+  m_Name: WingsLevel2
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3603065111927772913, guid: 5319141dff0bacb4db46b59ab343b050, type: 3}
-  damage: 20
-  speed: 0
-  coolDownDuration: 3
-  pierce: 0
+  multipliers: 200
+  level: 2
+  nextLevelPrefab: {fileID: 7144637969727986979, guid: 20ac8a22f3571cd42bd168b51f3944f5, type: 3}

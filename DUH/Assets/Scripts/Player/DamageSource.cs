@@ -1,3 +1,4 @@
+// DamageSource.cs
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class DamageSource : MonoBehaviour
 {
     [SerializeField] private WeaponInfo weaponInfo;
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Get the EnemyStats component from the collided object
@@ -15,7 +16,7 @@ public class DamageSource : MonoBehaviour
         if (enemyStats != null)
         {
             // Call the TakeDamage method on the retrieved EnemyStats instance
-            enemyStats.TakeDamage(weaponInfo.weaponDamage);
+            enemyStats.TakeDamage(weaponInfo.GetFinalWeaponDamage(FindObjectOfType<PlayerStats>().currentMight)); // Pass player's "might"
         }
 
         BreakableProps breakableProps = other.gameObject.GetComponent<BreakableProps>();

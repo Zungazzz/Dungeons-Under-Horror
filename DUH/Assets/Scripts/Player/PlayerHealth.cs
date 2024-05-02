@@ -10,12 +10,19 @@ public class PlayerHealth : MonoBehaviour
     // private Knockback knockback;
     // private Flash flash;
 
-    
-
     private void Awake()
     {
         playerStats = GetComponent<PlayerStats>();
-        maxHealth = playerStats.characterScriptableObject.MaxHealth;
+
+        // Check if playerStats is not null before accessing its properties
+        if (playerStats != null && playerStats.characterScriptableObject != null)
+        {
+            maxHealth = playerStats.characterScriptableObject.MaxHealth;
+        }
+        else
+        {
+            Debug.LogError("PlayerStats component or characterScriptableObject is missing.");
+        }
         // knockback = GetComponent<Knockback>();
         // flash = GetComponent<Flash>();
     }
@@ -28,13 +35,13 @@ public class PlayerHealth : MonoBehaviour
     private void OnCollisionStay2D(Collision2D other)
     {
         EnemyStats enemyStats = other.gameObject.GetComponent<EnemyStats>();
-        if (enemyStats && playerStats.cantakeDamage)
+        if (enemyStats && playerStats != null && playerStats.cantakeDamage)
         {
             // Get the damage value directly from the EnemyStats script
             float damage = enemyStats.currentDamage;
 
             // Apply damage to the player
-            playerStats.TakeDamage(damage,transform);
+            playerStats.TakeDamage(damage, transform);
 
             // // Apply knockback and flash effects
             // knockback.GetKnockBack(other.gameObject.transform, knockbackThrustAmount);
