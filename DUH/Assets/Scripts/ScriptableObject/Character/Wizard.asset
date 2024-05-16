@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1feab3994bbd2a4fb586f8c56263fbc, type: 3}
   m_Name: Wizard
   m_EditorClassIdentifier: 
+  characterIcon: {fileID: 21300000, guid: 378748bdb72e74f4d86f75daf72362c1, type: 3}
+  name: Wizard
   startingWeapon: {fileID: 0}
-  maxHealth: 70
+  maxHealth: 50
   recovery: 1
   moveSpeed: 3
   might: 1

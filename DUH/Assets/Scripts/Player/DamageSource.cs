@@ -16,7 +16,7 @@ public class DamageSource : MonoBehaviour
         if (enemyStats != null)
         {
             // Call the TakeDamage method on the retrieved EnemyStats instance
-            enemyStats.TakeDamage(weaponInfo.GetFinalWeaponDamage(FindObjectOfType<PlayerStats>().currentMight)); // Pass player's "might"
+            enemyStats.TakeDamage(weaponInfo.GetFinalWeaponDamage(FindObjectOfType<PlayerStats>().CurrentMight)); // Pass player's "might"
         }
 
         BreakableProps breakableProps = other.gameObject.GetComponent<BreakableProps>();

@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 4023190378458504425}
   - component: {fileID: 8750287211492427311}
   - component: {fileID: 7720782101021290076}
+  - component: {fileID: 5939758681497609360}
   m_Layer: 0
   m_Name: masked_orc
   m_TagString: Enemy
@@ -286,3 +287,15 @@ CapsuleCollider2D:
   m_Offset: {x: 0.058797896, y: -0.06571537}
   m_Size: {x: 0.6066817, y: 0.71736014}
   m_Direction: 0
+--- !u!210 &5939758681497609360
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6619271804325640141}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 4
+  m_SortAtRoot: 0

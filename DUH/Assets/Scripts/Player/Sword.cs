@@ -14,7 +14,7 @@ public class Sword : MonoBehaviour, IWeapon
         [SerializeField] private Transform slashAnimSpawnPoint;
 
         [SerializeField] private Transform weaponCollider;
-        [SerializeField] private float swordAttackCD = 0.5f;
+        [SerializeField] private float swordAttackCD;
         [SerializeField] private WeaponInfo weaponInfo;
     private void Awake()
     {
@@ -24,6 +24,7 @@ public class Sword : MonoBehaviour, IWeapon
         activeWeapon = GetComponentInParent<ActiveWeapon>();
         myAnimator = GetComponent<Animator>();
         playerControls = new PlayerControls();
+        swordAttackCD = weaponInfo.weaponCooldown;
 
         // Subscribe to the attack action when the controls are enabled
         playerControls.Enable();

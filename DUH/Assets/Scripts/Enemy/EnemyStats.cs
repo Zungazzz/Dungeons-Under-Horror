@@ -23,6 +23,9 @@ public class EnemyStats : MonoBehaviour
     public void TakeDamage(float damage){
 
         currentHealth -= damage;
+        if(damage>0){
+            GameManager.GenerateFloatingText($"{Mathf.FloorToInt(damage)}", transform);    
+        }
         if (knockback != null)
         {
             knockback.GetKnockBack(PlayerController.Instance.transform, knockBackThrust);

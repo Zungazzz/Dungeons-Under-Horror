@@ -3,6 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CharacterScriptableObject", menuName = "ScriptableObject/Character", order = 1)]
 public class CharacterScriptableObject : ScriptableObject
 {
+    [SerializeField] Sprite characterIcon;
+    public Sprite CharacterIcon { get => characterIcon; set => characterIcon = value; }
+    [SerializeField] new string name;
+    public string Name { get => name; set => name = value; }
     [SerializeField] private GameObject startingWeapon;
     public GameObject StartingWeapon { get => startingWeapon; set => startingWeapon = value; }
 

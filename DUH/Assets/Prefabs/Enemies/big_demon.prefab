@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3422940328378565354}
   - component: {fileID: 6779460902935333082}
   - component: {fileID: 3636912697882825735}
+  - component: {fileID: 8509148561515980114}
   m_Layer: 0
   m_Name: big_demon
   m_TagString: Enemy
@@ -250,3 +251,15 @@ MonoBehaviour:
   currentMoveSpeed: 0
   currentHealth: 0
   currentDamage: 0
+--- !u!210 &8509148561515980114
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6659092358652536290}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 4
+  m_SortAtRoot: 0

@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c40d14a207285f24a9593b711c1c3f4c, type: 3}
   m_Name: StoneWeaponLevel2
   m_EditorClassIdentifier: 
-  prefab: {fileID: 112778911536462501, guid: 1b443c24bbfd5ab48ba9c2cc5cdccd4d, type: 3}
+  prefab: {fileID: 112778911536462501, guid: a891338ffeaa68c46b026420d549058e, type: 3}
   damage: 10
   speed: 10
   coolDownDuration: 3
   pierce: 1
   level: 2
   nextLevelPrefab: {fileID: 0}
+  name: Dhunga
+  description: Increase damage by 2X.
+  icon: {fileID: -1693546014, guid: 253d4255a99936947b97956e6f49da67, type: 3}

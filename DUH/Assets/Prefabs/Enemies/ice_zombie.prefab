@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2933483488139796351}
   - component: {fileID: 4217161077601188013}
   - component: {fileID: 1273324274856494275}
+  - component: {fileID: 2724689173691003113}
   m_Layer: 0
   m_Name: ice_zombie
   m_TagString: Enemy
@@ -258,3 +259,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!210 &2724689173691003113
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2866399429465595248}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 4
+  m_SortAtRoot: 0

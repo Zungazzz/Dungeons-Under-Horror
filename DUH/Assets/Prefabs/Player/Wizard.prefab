@@ -334,6 +334,8 @@ GameObject:
   - component: {fileID: 5071354016492320224}
   - component: {fileID: 5982565824298343306}
   - component: {fileID: -2363330090803310570}
+  - component: {fileID: 5281226492955766145}
+  - component: {fileID: 458784892414851440}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Player
@@ -506,9 +508,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.023391865, y: -0.66181123}
-  m_Size: {x: 0.610758, y: 0.4435305}
-  m_Direction: 1
+  m_Offset: {x: -0.042636864, y: -0.45332456}
+  m_Size: {x: 0.5461725, y: 0.8605076}
+  m_Direction: 0
 --- !u!114 &3577166259549475273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,12 +524,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterScriptableObject: {fileID: 11400000, guid: df1c860cb2d0ff04f9a8a05ce177d773, type: 2}
-  currentHealth: 0
-  currentRecovery: 0
-  currentMoveSpeed: 0
-  currentMight: 0
-  currentProjectileSpeed: 0
-  currentMagnet: 0
   levelRanges:
   - startLevel: 1
     endLevel: 3
@@ -547,6 +543,12 @@ MonoBehaviour:
   cantakeDamage: 1
   invincibilityDuration: 0.5
   knockBackThrustAmount: 10
+  weaponIndex: 0
+  passiveItemIndex: 0
+  firstWeapon: {fileID: 5039057100884933126, guid: e2d93478308972141b54c6ed912b70e9, type: 3}
+  SecondWeapon: {fileID: 1818265111414160591, guid: 8c4849bf07a12ff4dafb66c0cb6c9be5, type: 3}
+  firstPassiveItemTest: {fileID: 9026055064681289607, guid: ef2fc029b7b44b544832baa8db86818f, type: 3}
+  secondPassiveItemTest: {fileID: 7144637969727986979, guid: 32401b9e796aa5049893f2f0262f8160, type: 3}
 --- !u!114 &1099125780441819233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,6 +603,52 @@ MonoBehaviour:
   fullStaminaImage: {fileID: 21300000, guid: b231405b9b9f4374986e3bbb5db29acc, type: 3}
   emptyStaminaImage: {fileID: 21300000, guid: 0ec8f2a0771edfd46980a63b60957f4c, type: 3}
   timeBetweenStaminaRefresh: 3
+--- !u!114 &5281226492955766145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5920470216001781994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c998b223a7ed73c4289debfdb658dad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  weaponLevels: 00000000000000000000000000000000
+  weaponUIImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  passiveItemUIImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  passiveItemsSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  passiveItemLevels: 00000000000000000000000000000000
+--- !u!210 &458784892414851440
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5920470216001781994}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 5
+  m_SortAtRoot: 0
 --- !u!1001 &5897300545502308519
 PrefabInstance:
   m_ObjectHideFlags: 0

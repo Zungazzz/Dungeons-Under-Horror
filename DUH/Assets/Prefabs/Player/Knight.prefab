@@ -660,7 +660,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_SortAtRoot: 0
 --- !u!114 &4361221245238554076
 MonoBehaviour:
@@ -675,12 +675,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterScriptableObject: {fileID: 11400000, guid: 0b2c653f0cd5c4e479512047070fd17d, type: 2}
-  currentHealth: 0
-  currentRecovery: 0
-  currentMoveSpeed: 0
-  currentMight: 0
-  currentProjectileSpeed: 0
-  currentMagnet: 0
   levelRanges:
   - startLevel: 1
     endLevel: 3
@@ -700,6 +694,12 @@ MonoBehaviour:
   cantakeDamage: 1
   invincibilityDuration: 0.5
   knockBackThrustAmount: 10
+  weaponIndex: 0
+  passiveItemIndex: 0
+  firstWeapon: {fileID: 0}
+  SecondWeapon: {fileID: 0}
+  firstPassiveItemTest: {fileID: 0}
+  secondPassiveItemTest: {fileID: 0}
 --- !u!114 &5306435896981221539
 MonoBehaviour:
   m_ObjectHideFlags: 0

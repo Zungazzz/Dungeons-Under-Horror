@@ -1,12 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Bow : MonoBehaviour, IWeapon
 {
     [SerializeField] private WeaponInfo weaponInfo;
     [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private Transform arrowSpawnPoint;
-    private bool attackButtonDown, isAttacking = false;
+    private bool isAttacking = false;
+    private bool isOnCooldown = false; // Flag to track whether the weapon is on cooldown
+    [SerializeField] private float attackCooldownDuration; // Cooldown duration in seconds
 
     private PlayerControls playerControls;
     private Animator myAnimator;
@@ -16,58 +19,66 @@ public class Bow : MonoBehaviour, IWeapon
     {
         playerControls = new PlayerControls();
         myAnimator = GetComponent<Animator>();
+        attackCooldownDuration = weaponInfo.weaponCooldown;
     }
 
     private void OnEnable()
     {
         playerControls.Enable();
+        playerControls.Combat.Attack.performed += _ => StartAttacking();
+        playerControls.Combat.Attack.canceled += _ => StopAttacking();
     }
 
     private void OnDisable()
     {
         playerControls.Disable();
-    }
-
-    private void Start()
-    {
-        playerControls.Combat.Attack.started += _ => StartAttacking();
-        playerControls.Combat.Attack.canceled += _ => StopAttacking();
+        playerControls.Combat.Attack.performed -= _ => StartAttacking();
+        playerControls.Combat.Attack.canceled -= _ => StopAttacking();
     }
 
     private void StartAttacking()
     {
-        if (!isAttacking)
+        if (!isAttacking && !isOnCooldown)
         {
-            attackButtonDown = true;
-            Attack();
+            isAttacking = true;
+            StartCoroutine(AttackRoutine());
         }
     }
 
     private void StopAttacking()
     {
-        attackButtonDown = false;
+        isAttacking = false;
     }
 
-public void Attack()
-{
-    if (attackButtonDown && !isAttacking)
+    private IEnumerator AttackRoutine()
     {
-        isAttacking = false;
-        myAnimator.SetTrigger(FIRE_HASH);
-
-        // Instantiate a new arrow projectile
-        GameObject newArrow = Instantiate(arrowPrefab, arrowSpawnPoint.position, arrowSpawnPoint.rotation);
-        newArrow.GetComponent<Projectile>().UpdateProjectileRange(weaponInfo.weaponRange);  
-        StartCoroutine(DestroyArrowAfterDelay(newArrow));
+        while (isAttacking && !isOnCooldown)
+        {
+            Attack();
+            yield return null;
+        }
     }
-}
 
-
-    private IEnumerator DestroyArrowAfterDelay(GameObject arrow)
+    public void Attack()
     {
-        yield return new WaitForSeconds(2f); // Change 3f to the desired delay in seconds
-        Destroy(arrow);
-        isAttacking = false;
+        if (!isOnCooldown)
+        {
+            myAnimator.SetTrigger(FIRE_HASH);
+
+            // Instantiate a new arrow projectile
+            GameObject newArrow = Instantiate(arrowPrefab, arrowSpawnPoint.position, arrowSpawnPoint.rotation);
+            newArrow.GetComponent<Projectile>().UpdateProjectileRange(weaponInfo.weaponRange);
+
+            StartCoroutine(AttackCooldownCoroutine()); // Start the cooldown coroutine
+        }
+    }
+
+    // Coroutine to handle attack cooldown
+    private IEnumerator AttackCooldownCoroutine()
+    {
+        isOnCooldown = true; // Set the cooldown flag
+        yield return new WaitForSeconds(attackCooldownDuration);
+        isOnCooldown = false; // Reset the cooldown flag after the cooldown duration
     }
 
     public WeaponInfo GetWeaponInfo()

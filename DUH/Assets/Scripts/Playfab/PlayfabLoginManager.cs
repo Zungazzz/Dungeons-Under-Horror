@@ -91,11 +91,11 @@ public class PlayfabLoginManager : MonoBehaviour
     }
     #endregion
 
-private void PlayfabFailure(PlayFabError error)
-{
-    messageText.text = error.ErrorMessage; 
-    Debug.LogError(error.GenerateErrorReport());
-}
+    private void PlayfabFailure(PlayFabError error)
+    {
+        messageText.text = error.ErrorMessage;
+        Debug.LogError(error.GenerateErrorReport());
+    }
     public void OnLogoutPressed()
     {
         // Clear stored player credentials
@@ -107,5 +107,8 @@ private void PlayfabFailure(PlayFabError error)
         SceneManager.LoadScene("LoginSignUp");
         Debug.Log("Logged out");
     }
-
+    public string GetUsername()
+    {
+        return PlayerPrefs.GetString("Username", "DefaultUsername");
+    }
 }

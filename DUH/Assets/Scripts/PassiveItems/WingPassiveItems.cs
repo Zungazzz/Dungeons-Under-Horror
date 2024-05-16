@@ -6,6 +6,6 @@ public class WingPassiveItems : PassiveItems
 {
     protected override void ApplyModifiers()
     {
-        playerStats.currentMoveSpeed += 1 + passiveItemsScriptableObject.Multiply / 100f;
+        playerStats.CurrentMoveSpeed += 1 + passiveItemsScriptableObject.Multiply / 100f;
     }
 }

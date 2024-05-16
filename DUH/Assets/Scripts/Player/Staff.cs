@@ -7,7 +7,10 @@ public class Staff : MonoBehaviour, IWeapon
     [SerializeField] private GameObject magicLaserPrefab;
     [SerializeField] private Transform magicLaserSpawnPoint;
 
+
     private Animator myAnimator;
+    private bool isOnCooldown = false; // Flag to track whether the weapon is on cooldown
+    [SerializeField] private float attackCooldownDuration = 0.5f; // Cooldown duration in seconds
 
     readonly int ATTACK_HASH = Animator.StringToHash("Attack");
     private PlayerControls playerControls;
@@ -16,6 +19,7 @@ public class Staff : MonoBehaviour, IWeapon
     {
         myAnimator = GetComponent<Animator>();
         playerControls = new PlayerControls();
+        attackCooldownDuration = weaponInfo.weaponCooldown;
     }
 
     private void OnEnable()
@@ -37,11 +41,24 @@ public class Staff : MonoBehaviour, IWeapon
     {
         MouseFollowWithOffset();
     }
+    
+    // Coroutine to handle attack cooldown
+    private IEnumerator AttackCooldownCoroutine()
+    {
+        isOnCooldown = true; // Set the cooldown flag
+        yield return new WaitForSeconds(attackCooldownDuration);
+        isOnCooldown = false; // Reset the cooldown flag after the cooldown duration
+    }
 
     public void Attack()
     {
-        myAnimator.SetTrigger(ATTACK_HASH);
-        SpawnStaffProjectileAnimEvent();
+        // Check if the weapon is on cooldown before attacking
+        if (!isOnCooldown)
+        {
+            myAnimator.SetTrigger(ATTACK_HASH);
+            SpawnStaffProjectileAnimEvent();
+            StartCoroutine(AttackCooldownCoroutine()); // Start the cooldown coroutine
+        }
     }
 
     // This method is called by the attack animation to spawn the magic laser projectile

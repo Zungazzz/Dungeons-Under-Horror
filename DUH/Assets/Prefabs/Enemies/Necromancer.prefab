@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 5893982408287354188}
   - component: {fileID: 895709715951142696}
   - component: {fileID: 4425663219551613884}
+  - component: {fileID: 1887647590325607581}
   m_Layer: 0
   m_Name: Necromancer
   m_TagString: Enemy
@@ -287,3 +288,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mortarProjectilePrefab: {fileID: 1169162202734469690, guid: 546a74d6d830fd749b4fb88fd4f453d0, type: 3}
+--- !u!210 &1887647590325607581
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601793799108862409}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 4
+  m_SortAtRoot: 0

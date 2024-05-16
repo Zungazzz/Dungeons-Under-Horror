@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         playerStats = GetComponent<PlayerStats>();
         playerControls.Movement.Dash.performed += _ => Dash();
-        startingMoveSpeed = playerStats.currentMoveSpeed;
+        startingMoveSpeed = playerStats.CurrentMoveSpeed;
 
     }
 
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         if(knockback.GettingKnockback || playerStats.isDead){ return; }
-        rb.MovePosition(rb.position + movement * (playerStats.currentMoveSpeed * Time.fixedDeltaTime));
+        rb.MovePosition(rb.position + movement * (playerStats.CurrentMoveSpeed * Time.fixedDeltaTime));
         
     }
 
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         if (!isDashing && Stamina.Instance.CurrentStamina > 0)
         {
             Stamina.Instance.UseStamina();
-            playerStats.currentMoveSpeed *= dashSpeed;
+            playerStats.CurrentMoveSpeed *= dashSpeed;
             isDashing = true;
             myTrailRenderer.emitting = true;
             StartCoroutine(EndDashRoutine());
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
         float dashTime = 0.2f;
         float dashCD = .25f;
         yield return new WaitForSeconds(dashTime);
-        playerStats.currentMoveSpeed = startingMoveSpeed;
+        playerStats.CurrentMoveSpeed = startingMoveSpeed;
         myTrailRenderer.emitting = false;
         yield return new WaitForSeconds(dashCD);
         isDashing = false;
