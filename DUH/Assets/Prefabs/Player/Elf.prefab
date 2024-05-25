@@ -304,6 +304,7 @@ GameObject:
   - component: {fileID: 1925535280698773831}
   - component: {fileID: 1897326705334014633}
   - component: {fileID: 3233443415941904622}
+  - component: {fileID: 3681286194804311954}
   m_Layer: 0
   m_Name: Elf
   m_TagString: Player
@@ -442,7 +443,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &1525970527011911342
 CapsuleCollider2D:
@@ -491,6 +492,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4433be2d2998c4d8faf6229c5b9d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  expBar: {fileID: 0}
+  levelText: {fileID: 0}
   characterScriptableObject: {fileID: 11400000, guid: 171c14ea272f23f429d8cdcb1eec513c, type: 2}
   levelRanges:
   - startLevel: 1
@@ -510,6 +513,7 @@ MonoBehaviour:
   experienceCap: 100
   cantakeDamage: 1
   invincibilityDuration: 0
+  animator: {fileID: 0}
   knockBackThrustAmount: 10
   weaponIndex: 0
   passiveItemIndex: 0
@@ -517,6 +521,8 @@ MonoBehaviour:
   SecondWeapon: {fileID: 0}
   firstPassiveItemTest: {fileID: 0}
   secondPassiveItemTest: {fileID: 0}
+  weaponInfo: {fileID: 0}
+  characterInfo: {fileID: 0}
 --- !u!114 &2236520176397681852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,6 +589,71 @@ MonoBehaviour:
   fullStaminaImage: {fileID: 21300000, guid: b231405b9b9f4374986e3bbb5db29acc, type: 3}
   emptyStaminaImage: {fileID: 21300000, guid: 0ec8f2a0771edfd46980a63b60957f4c, type: 3}
   timeBetweenStaminaRefresh: 5
+--- !u!114 &3681286194804311954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8574436086176606235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c998b223a7ed73c4289debfdb658dad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  weaponLevels: 00000000000000000000000000000000
+  weaponUIImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  passiveItemUIImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  passiveItemsSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  passiveItemLevels: 00000000000000000000000000000000
+  weaponUpgrades:
+  - WeaponUpgradeIndex: 0
+    initialWeapon: {fileID: 1818265111414160591, guid: 8c4849bf07a12ff4dafb66c0cb6c9be5, type: 3}
+    weaponData: {fileID: 11400000, guid: 9e1e2cbefbde6a84082b61c1c2f56504, type: 2}
+  - WeaponUpgradeIndex: 1
+    initialWeapon: {fileID: 5039057100884933126, guid: e2d93478308972141b54c6ed912b70e9, type: 3}
+    weaponData: {fileID: 11400000, guid: a47bdf4bb90670b40a86f2202dd1c3b9, type: 2}
+  passiveItemUpgrades:
+  - PassiveItemUpgradeIndex: 0
+    initialPassiveItem: {fileID: 7144637969727986979, guid: 32401b9e796aa5049893f2f0262f8160, type: 3}
+    passiveItemsScriptableObject: {fileID: 11400000, guid: 4a2d4f57e4870604bada78d14c3aaee1, type: 2}
+  - PassiveItemUpgradeIndex: 1
+    initialPassiveItem: {fileID: 9026055064681289607, guid: ef2fc029b7b44b544832baa8db86818f, type: 3}
+    passiveItemsScriptableObject: {fileID: 11400000, guid: c660145df1277ae48a498501e20c6cb2, type: 2}
+  upgradeUIOptions:
+  - upgradeNameDisplay: {fileID: 0}
+    upgradeDescriptionDisplay: {fileID: 0}
+    upgradeIcon: {fileID: 0}
+    upgradeButton: {fileID: 0}
+  - upgradeNameDisplay: {fileID: 0}
+    upgradeDescriptionDisplay: {fileID: 0}
+    upgradeIcon: {fileID: 0}
+    upgradeButton: {fileID: 0}
+  - upgradeNameDisplay: {fileID: 0}
+    upgradeDescriptionDisplay: {fileID: 0}
+    upgradeIcon: {fileID: 0}
+    upgradeButton: {fileID: 0}
+  - upgradeNameDisplay: {fileID: 0}
+    upgradeDescriptionDisplay: {fileID: 0}
+    upgradeIcon: {fileID: 0}
+    upgradeButton: {fileID: 0}
 --- !u!1001 &5348193417732034620
 PrefabInstance:
   m_ObjectHideFlags: 0

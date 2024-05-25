@@ -143,21 +143,30 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         roomColors.Add(UnityEngine.Random.ColorHSV());
     }
 
-    private void CreateCorridors(HashSet<Vector2Int> floorPositions, 
-        HashSet<Vector2Int> potentialRoomPositions)
-    {
-        var currentPosition = startPosition;
-        potentialRoomPositions.Add(currentPosition);
+private void CreateCorridors(HashSet<Vector2Int> floorPositions, 
+    HashSet<Vector2Int> potentialRoomPositions)
+{
+    var currentPosition = startPosition;
+    potentialRoomPositions.Add(currentPosition);
 
-        for (int i = 0; i < corridorCount; i++)
+    for (int i = 0; i < corridorCount; i++)
+    {
+        var corridor = ProceduralGenerationAlgorithms.RandomWalkCorridor(currentPosition, corridorLength);
+        currentPosition = corridor[corridor.Count - 1];
+        potentialRoomPositions.Add(currentPosition);
+        foreach (var position in corridor)
         {
-            var corridor = ProceduralGenerationAlgorithms.RandomWalkCorridor(currentPosition, corridorLength);
-            currentPosition = corridor[corridor.Count - 1];
-            potentialRoomPositions.Add(currentPosition);
-            floorPositions.UnionWith(corridor);
+            floorPositions.Add(position);
+            // Add adjacent tiles to make the corridor wider
+            foreach (var direction in Direction2D.cardinalDirectionsList)
+            {
+                floorPositions.Add(position + direction);
+            }
         }
-        corridorPositions = new HashSet<Vector2Int>(floorPositions);
     }
+    corridorPositions = new HashSet<Vector2Int>(floorPositions);
+}
+
 
     private void OnDrawGizmosSelected()
     {

@@ -12,27 +12,66 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: ad342c2995db1254eb3e4a7407cd07ec
   - enabled: 1
-    path: Assets/Scenes/characterselector.unity
-    guid: 8d9526081b1783f4f97c8690039b3b3a
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
-    path: Assets/Scenes/weapons.unity
-    guid: bb6fd72f9c0addb47b3a723a8904d1bd
-  - enabled: 1
-    path: Assets/Scenes/DungeonGeneration.unity
-    guid: 4007e7a382420e843892304df0e67bb5
-  - enabled: 1
     path: Assets/Scenes/CharacterSelection.unity
     guid: 12fad38b9495e754e86cce6a806b3b31
   - enabled: 1
+    path: Assets/Scenes/Wizard_Level/Level1-1(Wizard).unity
+    guid: da4e23e1e5cd4fd4485053b550919e1c
+  - enabled: 1
+    path: Assets/Scenes/Wizard_Level/Level1-2(Wizard).unity
+    guid: b4c6d814d67fa00408abfa705bf3b7ca
+  - enabled: 1
+    path: Assets/Scenes/Wizard_Level/Level2-1(Wizard).unity
+    guid: d9835a45e1f2b05439c4478e6c5ad40e
+  - enabled: 1
+    path: Assets/Scenes/Wizard_Level/Level2-2(Wizard).unity
+    guid: 6c027b4e21ddb7c4ead2d3945edd87cc
+  - enabled: 1
+    path: Assets/Scenes/Level2-1(Knight).unity
+    guid: fd2aed071a0520543b1c993c8feadffe
+  - enabled: 1
+    path: Assets/Scenes/Wizard_Level/Level3-3(Wizard).unity
+    guid: c36977a098a1e3d4ea5bad80508b0cd5
+  - enabled: 1
+    path: Assets/Scenes/Wizard_Level/Level3-2(Wizard).unity
+    guid: df6134b22f031fd438e3d60ff2f6876a
+  - enabled: 1
+    path: Assets/Scenes/Wizard_Level/Level3-1(Wizard).unity
+    guid: 226cd8d5644aeb14b88080f02f197670
+  - enabled: 1
+    path: Assets/Scenes/Wizard_Level/Level2-3(Wizard).unity
+    guid: b36471ad6691e9d419ac7976821e9070
+  - enabled: 1
+    path: Assets/Scenes/Wizard_Level/Level1-3(Wizard).unity
+    guid: 9f85223ae02de9f4b92a6e2b2e39280b
+  - enabled: 1
+    path: Assets/Scenes/Level1-1(Knight).unity
+    guid: 962851ced2aa0a24db37b8ee91e08cab
+  - enabled: 1
+    path: Assets/Scenes/Level1-1(Elf).unity
+    guid: 57b1a832d16eb584ab5bd87267bb7bac
+  - enabled: 1
+    path: Assets/Scenes/Level1-2(Elf).unity
+    guid: 912fd699ee343f04f8cd4014b12c7ff5
+  - enabled: 1
+    path: Assets/Scenes/Level1-2(Knight).unity
+    guid: 20647527694fa264fb0c6947a411e589
+  - enabled: 0
+    path: Assets/Scenes/SampleScene.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 0
+    path: Assets/Scenes/weapons.unity
+    guid: bb6fd72f9c0addb47b3a723a8904d1bd
+  - enabled: 0
+    path: Assets/Scenes/DungeonGeneration.unity
+    guid: 4007e7a382420e843892304df0e67bb5
+  - enabled: 0
     path: Assets/Scenes/Knight_Test.unity
     guid: c5b931df263adaa4fb9f9f92351c3bc0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Elf_Test.unity
     guid: d99e5bdc2ef3dbd40ae0e3c1406fa657
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Wizard_Test.unity
     guid: 659b64bcd956f174996e92fc0fcf877d
   m_configObjects: {}

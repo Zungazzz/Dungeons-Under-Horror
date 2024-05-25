@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   multipliers: 200
   level: 2
-  nextLevelPrefab: {fileID: 7144637969727986979, guid: 20ac8a22f3571cd42bd168b51f3944f5, type: 3}
+  nextLevelPrefab: {fileID: 7144637969727986979, guid: 77f9f9cb0c8080f4b94d1fe8519fb6a7, type: 3}
   name: Jutta
   description: Movement speed increase by 50 points.
   icon: {fileID: 21300000, guid: d44913aa0d0158244a1d16a7d649b3a6, type: 3}

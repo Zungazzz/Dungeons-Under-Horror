@@ -18,7 +18,7 @@ MonoBehaviour:
   coolDownDuration: 3
   pierce: 1
   level: 2
-  nextLevelPrefab: {fileID: 0}
+  nextLevelPrefab: {fileID: 1818265111414160591, guid: 26eb80bc4dbac4349a2cfbc0bf4fa401, type: 3}
   name: Dhunga
-  description: Increase damage by 2X.
+  description: Increase damage by 100%
   icon: {fileID: -1693546014, guid: 253d4255a99936947b97956e6f49da67, type: 3}

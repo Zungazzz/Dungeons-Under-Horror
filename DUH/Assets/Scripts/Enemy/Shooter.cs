@@ -14,7 +14,7 @@ public class Shooter : MonoBehaviour, IEnemy
     [SerializeField] private float restTime = 1f;
     [SerializeField] private bool stagger;
     [SerializeField] private bool oscillate;
-
+    AudioManager audioManager;  
     private bool isShooting = false;
 
     private void OnValidate() {
@@ -34,7 +34,9 @@ public class Shooter : MonoBehaviour, IEnemy
             StartCoroutine(ShootRoutine());
         }
     }
-
+    void Awake() {
+        audioManager = GameObject.FindWithTag("Audio").GetComponent<AudioManager>();
+    }
     private IEnumerator ShootRoutine()
     {
         isShooting = true;
@@ -65,7 +67,7 @@ public class Shooter : MonoBehaviour, IEnemy
             for (int j = 0; j < projectilesPerBurst; j++)
             {
                 Vector2 pos = FindBulletSpawnPos(currentAngle);
-
+                audioManager.PlaySFX(audioManager.Fire);
                 GameObject newBullet = Instantiate(bulletPrefab, pos, Quaternion.identity);
                 newBullet.transform.right = newBullet.transform.position - transform.position;
 

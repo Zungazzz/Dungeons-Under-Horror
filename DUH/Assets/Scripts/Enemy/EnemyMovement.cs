@@ -6,6 +6,10 @@ public class EnemyMovement : MonoBehaviour
 {
     EnemyStats enemyData;
     Transform player;
+    [SerializeField] private float chaseRadius = 5f; // Adjust this value in the Inspector
+    [SerializeField] private bool chaseForever = false; // Set this to true if you want the enemy to chase forever once detected
+
+    private bool playerDetected = false;
 
     // Start is called before the first frame update
     void Start()
@@ -17,8 +21,21 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveTowardsPlayer();
-        AdjustEnemyFacingDirection();
+        if (player != null)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+            if (!playerDetected && distanceToPlayer <= chaseRadius)
+            {
+                playerDetected = true;
+            }
+
+            if (playerDetected || distanceToPlayer <= chaseRadius)
+            {
+                MoveTowardsPlayer();
+                AdjustEnemyFacingDirection();
+            }
+        }
     }
 
     void MoveTowardsPlayer()
@@ -29,7 +46,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    void AdjustEnemyFacingDirection()
+    public void AdjustEnemyFacingDirection()
     {
         if (player != null)
         {

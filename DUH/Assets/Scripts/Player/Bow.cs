@@ -7,6 +7,7 @@ public class Bow : MonoBehaviour, IWeapon
     [SerializeField] private WeaponInfo weaponInfo;
     [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private Transform arrowSpawnPoint;
+    AudioManager audioManager;
     private bool isAttacking = false;
     private bool isOnCooldown = false; // Flag to track whether the weapon is on cooldown
     [SerializeField] private float attackCooldownDuration; // Cooldown duration in seconds
@@ -16,7 +17,9 @@ public class Bow : MonoBehaviour, IWeapon
     readonly int FIRE_HASH = Animator.StringToHash("Fire");
 
     private void Awake()
-    {
+    {   
+        audioManager = GameObject.FindWithTag("Audio").GetComponent<AudioManager>();
+
         playerControls = new PlayerControls();
         myAnimator = GetComponent<Animator>();
         attackCooldownDuration = weaponInfo.weaponCooldown;
@@ -79,6 +82,7 @@ public class Bow : MonoBehaviour, IWeapon
         isOnCooldown = true; // Set the cooldown flag
         yield return new WaitForSeconds(attackCooldownDuration);
         isOnCooldown = false; // Reset the cooldown flag after the cooldown duration
+        audioManager.PlaySFX(audioManager.BowShooting);
     }
 
     public WeaponInfo GetWeaponInfo()

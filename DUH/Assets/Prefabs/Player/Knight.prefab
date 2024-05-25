@@ -674,6 +674,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4433be2d2998c4d8faf6229c5b9d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  expBar: {fileID: 0}
+  levelText: {fileID: 0}
   characterScriptableObject: {fileID: 11400000, guid: 0b2c653f0cd5c4e479512047070fd17d, type: 2}
   levelRanges:
   - startLevel: 1
@@ -700,6 +702,8 @@ MonoBehaviour:
   SecondWeapon: {fileID: 0}
   firstPassiveItemTest: {fileID: 0}
   secondPassiveItemTest: {fileID: 0}
+  weaponInfo: {fileID: 0}
+  characterInfo: {fileID: 0}
 --- !u!114 &5306435896981221539
 MonoBehaviour:
   m_ObjectHideFlags: 0

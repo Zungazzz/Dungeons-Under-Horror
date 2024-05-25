@@ -7,6 +7,8 @@ public class Staff : MonoBehaviour, IWeapon
     [SerializeField] private GameObject magicLaserPrefab;
     [SerializeField] private Transform magicLaserSpawnPoint;
 
+    AudioManager audioManager;
+
 
     private Animator myAnimator;
     private bool isOnCooldown = false; // Flag to track whether the weapon is on cooldown
@@ -17,6 +19,7 @@ public class Staff : MonoBehaviour, IWeapon
 
     private void Awake()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         myAnimator = GetComponent<Animator>();
         playerControls = new PlayerControls();
         attackCooldownDuration = weaponInfo.weaponCooldown;
@@ -57,6 +60,7 @@ public class Staff : MonoBehaviour, IWeapon
         {
             myAnimator.SetTrigger(ATTACK_HASH);
             SpawnStaffProjectileAnimEvent();
+            audioManager.PlaySFX(audioManager.LaserBeam);
             StartCoroutine(AttackCooldownCoroutine()); // Start the cooldown coroutine
         }
     }

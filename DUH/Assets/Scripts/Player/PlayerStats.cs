@@ -15,6 +15,8 @@ public class PlayerStats : MonoBehaviour
     float currentRecovery;
     float currentProjectileSpeed;
     float currentMight;
+    AudioManager audioManager;
+    
     public bool isDead
     {
         get;
@@ -153,6 +155,7 @@ public class PlayerStats : MonoBehaviour
     [Header("I-Frames")]
     public float invincibilityDuration;
     float invincibilityTimer;
+    public Animator animator;
     bool isInvincible;
     private Knockback knockback;
     private Flash flash;
@@ -162,11 +165,14 @@ public class PlayerStats : MonoBehaviour
     public int passiveItemIndex;
     public GameObject firstWeapon, SecondWeapon;
     public GameObject firstPassiveItemTest, secondPassiveItemTest;
+    public WeaponInfo weaponInfo;
+    public CharacterScriptableObject characterInfo;
 
 
     void Awake()
     {
         inventory = GetComponent<Inventory>();
+        // MaxHealth = characterScriptableObject.MaxHealth;
         CurrentHealth = characterScriptableObject.MaxHealth;
         CurrentRecovery = characterScriptableObject.Recovery; // Set CurrentRecovery
         CurrentMoveSpeed = characterScriptableObject.MoveSpeed;
@@ -176,10 +182,11 @@ public class PlayerStats : MonoBehaviour
         CurrentMagnet = characterScriptableObject.Magnet; // Set CurrentMagnet
         knockback = GetComponent<Knockback>();
         flash = GetComponent<Flash>();
-        SpawnWeapon(firstWeapon);
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        // SpawnWeapon(firstWeapon);
         // SpawnWeapon(SecondWeapon);
         // SpawnPassiveItems(firstPassiveItemTest);
-        SpawnPassiveItems(secondPassiveItemTest);
+        // SpawnPassiveItems(secondPassiveItemTest);
     }
 
 
@@ -234,7 +241,9 @@ public class PlayerStats : MonoBehaviour
     {
         if (experience >= experienceCap)
         {
+            audioManager.PlaySFX(audioManager.LevelUp);
             level++;
+            ApplyLevelUpChanges();
             experience -= experienceCap;
             int experienceCapIncrease = 0;
             foreach (LevelRange range in levelRanges)
@@ -278,6 +287,7 @@ public class PlayerStats : MonoBehaviour
             invincibilityTimer = invincibilityDuration;
             isInvincible = true;
             UpdateHealthSlider();
+            audioManager.PlaySFX(audioManager.Damage);
             if (CurrentHealth <= 0)
             {
                 isDead = true;
@@ -305,7 +315,7 @@ public class PlayerStats : MonoBehaviour
 
     private IEnumerator DeathLoadSceneRoutine()
     {
-
+        audioManager.PlaySFX(audioManager.Death);
         yield return new WaitForSeconds(1f);
         // SceneManager.LoadScene("MainMenu");
         Destroy(gameObject);
@@ -395,5 +405,36 @@ public class PlayerStats : MonoBehaviour
             Debug.Log("Inventory is full");
         }
     }
+public void ApplyLevelUpChanges()
+{
+    // Modify the runtime stats directly
+    currentHealth += 10; // Example: Increase max health by 10
+    currentRecovery += 5; // Example: Increase recovery by 5
+    currentMoveSpeed += 0.2f; // Example: Increase move speed by 0.2f
+
+    // Ensure health does not exceed the new max health
+    if (currentHealth > characterScriptableObject.MaxHealth + (level - 1) * 10) {
+        currentHealth = characterScriptableObject.MaxHealth + (level - 1) * 10;
+    }
+
+    // Update character stats in the UI
+    UpdateCharacterStatsUI();
+}
+
+public void UpdateCharacterStatsUI()
+{
+    if (GameManager.instance != null)
+    {   
+        GameManager.instance.currentHealthText.text = "Health: " + currentHealth.ToString();
+        GameManager.instance.currentRecoveryText.text = "Recovery: " + currentRecovery.ToString();
+        GameManager.instance.currentMoveSpeedText.text = "Move Speed: " + currentMoveSpeed.ToString();
+        GameManager.instance.currentMightText.text = "Might: " + currentMight.ToString();
+        GameManager.instance.currentProjectileSpeedText.text = "Projectile Speed: " + currentProjectileSpeed.ToString();
+        GameManager.instance.currentMagnetText.text = "Magnet: " + currentMagnet.ToString();
+    }
+
+    UpdateHealthSlider();
+}
+
 
 }

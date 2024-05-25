@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    Transform player;
     [SerializeField] private float roamChangeDirFloat = 2f;
     [SerializeField] private float attackRange = 0f;
     [SerializeField] private MonoBehaviour enemyType;
@@ -35,6 +36,7 @@ public class EnemyAI : MonoBehaviour
 
     public void Update()
     {
+        AdjustEnemyFacingDirection();
         MovementStateControl();
 
     }
@@ -70,6 +72,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Attacking()
     {
+
         // Check if the player is out of attack range, switch to roaming state
         if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) > attackRange)
         {
@@ -108,5 +111,23 @@ public class EnemyAI : MonoBehaviour
     {
         timeRoaming = 0;
         return new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+    }
+    void AdjustEnemyFacingDirection()
+    {
+        if (player != null)
+        {
+            Vector3 directionToPlayer = player.position - transform.position;
+
+            if (directionToPlayer.x < 0)
+            {
+                // Face left
+                transform.localScale = new Vector3(-1, 1, 1); // This assumes the enemy is facing right by default
+            }
+            else
+            {
+                // Face right
+                transform.localScale = new Vector3(1, 1, 1); // This assumes the enemy is facing right by default
+            }
+        }
     }
 }

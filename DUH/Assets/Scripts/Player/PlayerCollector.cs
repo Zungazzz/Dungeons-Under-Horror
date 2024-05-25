@@ -7,10 +7,16 @@ public class PlayerCollector : MonoBehaviour
     PlayerStats playerStats;
     CircleCollider2D playerCollector;
     public float pullForce;
+
+    AudioManager audioManager;
     void Start()
     {
         playerStats = FindObjectOfType<PlayerStats>();
         playerCollector = GetComponent<CircleCollider2D>();
+    }
+    void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
     void Update()
     {
@@ -24,6 +30,7 @@ public class PlayerCollector : MonoBehaviour
             Vector2 forceDirection = transform.position - col.transform.position;
             rb.AddForce(forceDirection * pullForce);
             collectible.Collect();
+            audioManager.PlaySFX(audioManager.CoinCollect);
         }
     }
 }

@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private PlayerControls playerControls;
     private float startingMoveSpeed;
     private Knockback knockback;
+    AudioManager audioManager;
     private void Start()
     {
         playerStats = GetComponent<PlayerStats>();
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         Instance = this;
         playerControls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
@@ -68,7 +70,7 @@ public class PlayerController : MonoBehaviour
         // Set animator parameters based on movement input
         myAnimator.SetFloat("moveX", movement.x);
         myAnimator.SetFloat("moveY", movement.y);
-
+    
         bool isMoving = movement.magnitude > 0.1f;
 
 
@@ -77,9 +79,9 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if(knockback.GettingKnockback || playerStats.isDead){ return; }
+        if (knockback.GettingKnockback || playerStats.isDead) { return; }
         rb.MovePosition(rb.position + movement * (playerStats.CurrentMoveSpeed * Time.fixedDeltaTime));
-        
+
     }
 
 
@@ -102,6 +104,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Dash()
     {
+
         if (!isDashing && Stamina.Instance.CurrentStamina > 0)
         {
             Stamina.Instance.UseStamina();
@@ -109,6 +112,7 @@ public class PlayerController : MonoBehaviour
             isDashing = true;
             myTrailRenderer.emitting = true;
             StartCoroutine(EndDashRoutine());
+            audioManager.PlaySFX(audioManager.Dash);
         }
 
     }

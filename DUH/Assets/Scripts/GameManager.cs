@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject activeWeapon;
     public GameObject gameoverScreen;
     public GameObject levelUpScreen;
+    public GameObject levelCompleteScreen;
 
 
     public enum GameState
@@ -17,7 +18,8 @@ public class GameManager : MonoBehaviour
         Playing,
         Paused,
         GameOver,
-        LevelUp
+        LevelUp, 
+        LevelComplete
     }
     public GameState currentState;
     public GameState previousState;
@@ -66,6 +68,9 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Game Over");
                 DisplayResultScreen();
                 break;
+            case GameState.LevelComplete:
+                LevelComplete();
+                break;
             case GameState.LevelUp:
                 if (!choosingUpgrade)
                 {
@@ -112,7 +117,7 @@ public class GameManager : MonoBehaviour
             ChangeState(GameState.Paused);
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
-            activeWeapon.SetActive(false);
+            // activeWeapon.SetActive(false);
             Debug.Log("Game Paused");
         }
     }
@@ -124,7 +129,8 @@ public class GameManager : MonoBehaviour
             ChangeState(previousState);
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
-            activeWeapon.SetActive(true);
+            // activeWeapon.SetActive(true);
+            // activeWeapon.SetActive(true);
             Debug.Log("Game Resumed");
         }
     }
@@ -147,6 +153,7 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false);
         gameoverScreen.SetActive(false);
         levelUpScreen.SetActive(false);
+        levelCompleteScreen.SetActive(false);
     }
     public void GameOver()
     {
@@ -159,7 +166,13 @@ public class GameManager : MonoBehaviour
         gameoverScreen.SetActive(true);
     }
 
-
+    void LevelComplete()
+    {
+        ChangeState(GameState.LevelComplete);
+        Time.timeScale = 0;
+        Debug.Log("Level Complete");
+        levelCompleteScreen.SetActive(true);
+    }
     public void AssignChosenCharacterUI(CharacterScriptableObject character)
     {
         characterIcon.sprite = character.CharacterIcon;
@@ -202,14 +215,17 @@ public class GameManager : MonoBehaviour
     {
         ChangeState(GameState.LevelUp);
         playerObject.SendMessage("RemoveAndApplyUpgradeOptions");
-        activeWeapon.SetActive(false);
+        // activeWeapon.SetActive(false);
     }
     public void EndLevelUp()
     {
         choosingUpgrade = false;
         Time.timeScale = 1f;
         levelUpScreen.SetActive(false);
-        activeWeapon.SetActive(true);
+        // activeWeapon.SetActive(true);
+        // activeWeapon.SetActive(true);
+        // activeWeapon.SetActive(true);
+        // activeWeapon.SetActive(true);
         ChangeState(GameState.Playing);
 
     }

@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &229318373283883927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6433202301377305097}
+  - component: {fileID: 7140187935755900478}
+  - component: {fileID: 539664277601507001}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6433202301377305097
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229318373283883927}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7140187935755900478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229318373283883927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0df233db468cf429132d32c316a276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeWeapon: {fileID: 0}
+  gameoverScreen: {fileID: 0}
+  levelUpScreen: {fileID: 0}
+  levelCompleteScreen: {fileID: 0}
+  currentState: 0
+  previousState: 0
+  damageTextCanvas: {fileID: 0}
+  textFontSize: 25
+  textFont: {fileID: 11400000, guid: 77d847c19cf972443a7b60aac6f60cf5, type: 2}
+  referenceCamera: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  currentHealthText: {fileID: 0}
+  currentMagnetText: {fileID: 0}
+  currentMoveSpeedText: {fileID: 0}
+  currentRecoveryText: {fileID: 0}
+  currentProjectileSpeedText: {fileID: 0}
+  currentMightText: {fileID: 0}
+  isGameOver: 0
+  choosingUpgrade: 0
+  playerObject: {fileID: 0}
+  characterIcon: {fileID: 0}
+  characterName: {fileID: 0}
+  chosenWeaponsUI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  chosenPassiveItemsUI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &539664277601507001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229318373283883927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6249e656342fda2499392ab4a2c9ea16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

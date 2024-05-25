@@ -9,6 +9,7 @@ public class MagicLaser : MonoBehaviour
     private float laserRange;
     private SpriteRenderer spriteRenderer;
     private CapsuleCollider2D capsuleCollider2D;
+    private bool hasDamaged = false; // Flag to track if the laser has caused damage
 
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -24,12 +25,18 @@ public class MagicLaser : MonoBehaviour
         StartCoroutine(IncreaseLaserLengthRoutine());
     }
 
-private void OnTriggerEnter2D(Collider2D other) {
-    if (other.gameObject.GetComponent<Indestructible>() != null && other.isTrigger) {
-        isGrowing = false;
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (!hasDamaged && other.gameObject.GetComponent<Indestructible>() != null && other.isTrigger) {
+            isGrowing = false;
+            hasDamaged = true; // Set the flag to true when causing damage
+            StartCoroutine(ResetHasDamagedFlag());
+        }
     }
-}
 
+    private IEnumerator ResetHasDamagedFlag() {
+        yield return new WaitForSeconds(1f); // Adjust the delay as needed
+        hasDamaged = false; // Reset the flag after a delay
+    }
 
     private IEnumerator IncreaseLaserLengthRoutine() {
         float timePassed = 0f;

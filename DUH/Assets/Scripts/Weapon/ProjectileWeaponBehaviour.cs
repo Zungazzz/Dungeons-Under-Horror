@@ -101,6 +101,10 @@ public class ProjectileWeaponBehaviour : MonoBehaviour
             }
         }
     }
+        protected virtual void Update()
+    {
+        // Base Update method implementation
+    }
     void ReducePierce()
     {
         currentPirece--;

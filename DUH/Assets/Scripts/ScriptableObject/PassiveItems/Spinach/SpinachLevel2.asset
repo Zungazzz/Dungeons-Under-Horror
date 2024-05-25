@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb7f2aa5130a1e844b2c7cdd779d17fc, type: 3}
   m_Name: SpinachLevel2
   m_EditorClassIdentifier: 
-  multipliers: 150
+  multipliers: 100
   level: 2
-  nextLevelPrefab: {fileID: 9026055064681289607, guid: f1e7b3a93b6bc4040bbbb31433d4b365, type: 3}
+  nextLevelPrefab: {fileID: 9026055064681289607, guid: ebbb7624f70bb7c429152806b33cb212, type: 3}
   name: Daal Bhat
-  description: Increase Damage by 1.5X.
+  description: Increase Damage by 100%
   icon: {fileID: 21300000, guid: 055979a79d57deb4b88667614fb4fbea, type: 3}

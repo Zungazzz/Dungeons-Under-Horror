@@ -10,7 +10,11 @@ public class MortarProjectile : MonoBehaviour
     [SerializeField] private GameObject mortarShadowPrefab ;
     [SerializeField] private GameObject mortarSplatter;
     // Start is called before the first frame update
-
+    AudioManager audioManager;
+    void Awake()
+    {
+        audioManager = GameObject.FindWithTag("Audio").GetComponent<AudioManager>();
+    }
     void Start()
     {
         GameObject mortarShadow = Instantiate(mortarShadowPrefab, transform.position + new Vector3(0,-0.3f,0), Quaternion.identity);
@@ -32,6 +36,7 @@ public class MortarProjectile : MonoBehaviour
             
         }
         Instantiate(mortarSplatter, transform.position, Quaternion.identity);
+        audioManager.PlaySFX(audioManager.Explosion);
         Destroy(gameObject);
     }
     private IEnumerator MoveMortarShadowRoutine(GameObject mortarShadow, Vector3 startPosition, Vector3 endPosition)

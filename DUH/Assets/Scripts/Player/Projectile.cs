@@ -48,14 +48,14 @@ private void OnTriggerEnter2D(Collider2D other)
         // Destroy the projectile
         Destroy(gameObject);
     }
-    else
+    else if (!other.isTrigger)
     {
         EnemyStats enemyStats = other.gameObject.GetComponent<EnemyStats>();
         Indestructible indestructible = other.gameObject.GetComponent<Indestructible>();
 
-        if (!other.isTrigger && (enemyStats || indestructible))
+        if (!isEnemyProjectile && (enemyStats || indestructible))
         {
-            if ((enemyStats && !isEnemyProjectile) || (indestructible && !isEnemyProjectile))
+            if (enemyStats || indestructible)
             {
                 Instantiate(particleOnHitPrefabVFX, transform.position, transform.rotation);
                 Destroy(gameObject);
@@ -63,6 +63,7 @@ private void OnTriggerEnter2D(Collider2D other)
         }
     }
 }
+
 
 
     private void DetectFireDistance()

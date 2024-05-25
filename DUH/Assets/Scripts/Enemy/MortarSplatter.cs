@@ -5,8 +5,6 @@ using UnityEngine;
 public class MortarSplatter : MonoBehaviour
 {
     private SpriteFade spriteFade;
-
-    private PlayerStats playerStats; // Variable to hold PlayerStats component
     public WeaponInfo weaponInfo; // Assuming you have a WeaponInfo component attached to the same GameObject
 
     private void Awake()
@@ -17,19 +15,21 @@ public class MortarSplatter : MonoBehaviour
     void Start()
     {
         StartCoroutine(spriteFade.SlowFadeRoutine());
-        Invoke("DisableCollider", 0.2f); 
+        Invoke("DisableCollider", 0.2f);
     }
 
-private void OnTriggerEnter2D(Collider2D other)
-{
-    PlayerStats playerStats = other.GetComponent<PlayerStats>();
-    if (playerStats != null)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // Apply damage to the player
-        playerStats.TakeDamage(weaponInfo.weaponDamage, transform);
+        if (other.CompareTag("Player")) // Check if the collider has the "Player" tag
+        {
+            PlayerStats playerStats = other.GetComponent<PlayerStats>();
+            if (playerStats != null)
+            {
+                // Apply damage to the player
+                playerStats.TakeDamage(weaponInfo.weaponDamage, transform);
+            }
+        }
     }
-}
-
 
     private void DisableCollider()
     {

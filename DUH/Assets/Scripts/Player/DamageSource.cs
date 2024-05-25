@@ -12,6 +12,10 @@ public class DamageSource : MonoBehaviour
         // Get the EnemyStats component from the collided object
         EnemyStats enemyStats = other.gameObject.GetComponent<EnemyStats>();
 
+        if(other.gameObject.CompareTag("Enemy"))
+        {
+            enemyStats.TakeDamage(weaponInfo.GetFinalWeaponDamage(FindObjectOfType<PlayerStats>().CurrentMight)); // Pass player's "might"
+        }
         // Check if enemyStats is not null before attempting to call TakeDamage
         if (enemyStats != null)
         {
