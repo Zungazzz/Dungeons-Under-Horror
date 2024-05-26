@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class PrefabPlacer : MonoBehaviour
 {
@@ -22,11 +25,10 @@ public class PrefabPlacer : MonoBehaviour
                     100,
                     placementData.enemySize,
                     false
-                    );
+                );
                 if (possiblePlacementSpot.HasValue)
                 {
-
-                    placedObjects.Add(CreateObject(placementData.enemyPrefab, possiblePlacementSpot.Value + new Vector2(0.5f, 0.5f))); //Instantiate(placementData.enemyPrefab,possiblePlacementSpot.Value + new Vector2(0.5f, 0.5f), Quaternion.identity)
+                    placedObjects.Add(CreateObject(placementData.enemyPrefab, possiblePlacementSpot.Value + new Vector2(0.5f, 0.5f)));
                 }
             }
         }
@@ -47,22 +49,21 @@ public class PrefabPlacer : MonoBehaviour
                     placementData.itemData.placementType, 
                     100, 
                     placementData.itemData.size, 
-                    placementData.itemData.addOffset);
-
+                    placementData.itemData.addOffset
+                );
 
                 if (possiblePlacementSpot.HasValue)
                 {
-
                     placedObjects.Add(PlaceItem(placementData.itemData, possiblePlacementSpot.Value));
                 }
             }
         }
         return placedObjects;
     }
+
     private GameObject PlaceItem(ItemData item, Vector2 placementPosition)
     {
-        GameObject newItem = CreateObject(itemPrefab,placementPosition);
-        //GameObject newItem = Instantiate(itemPrefab, placementPosition, Quaternion.identity);
+        GameObject newItem = CreateObject(itemPrefab, placementPosition);
         newItem.GetComponent<Item>().Initialize(item);
         return newItem;
     }
@@ -78,9 +79,13 @@ public class PrefabPlacer : MonoBehaviour
         }
         else
         {
+#if UNITY_EDITOR
             newItem = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
             newItem.transform.position = placementPosition;
             newItem.transform.rotation = Quaternion.identity;
+#else
+            newItem = Instantiate(prefab, placementPosition, Quaternion.identity);
+#endif
         }
 
         return newItem;

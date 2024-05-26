@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a939f640e5ebc4d922d55b80e42224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 3528004773616445161, guid: 6fe3306a4aaabf940bbd954a6c6f7b3c, type: 3}
+  player: {fileID: 3528004773616445161, guid: b572ec591855e184d969f847ed37bf60, type: 3}
   itemData:
   - minQuantity: 4
     maxQuantity: 6
